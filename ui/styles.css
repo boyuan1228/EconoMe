@@ -1,0 +1,182 @@
+/* styles.css */
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: flex;
+  background: lightseagreen;
+}
+
+img {
+  max-width: 60%; /* You can adjust this value */
+  height: auto;
+}
+
+h2 {
+  color: #333;
+  font: 100;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 20px 50px;
+  margin: 10px 0;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+.rounded-logo {
+  border-radius: 20px;
+}
+
+/* Style for form labels and input text */
+form label,
+form input {
+  font-size: 42px; /* Set the font size as desired */
+}
+
+/* Style for buttons */
+button {
+  font-size: 32px; /* Set the font size as desired */
+  padding: 25px 80px; /* Larger padding for a bigger button appearance */
+  /* ... (other button styles) ... */
+}
+
+/* Style for the main heading */
+h1 {
+  font-size: 64px; /* Set the font size as desired */
+  /* ... (other h1 styles) ... */
+}
+
+/* Top Navigation Bar */
+.top-nav {
+  width: 100%;
+  background-color: #f0f0f0; /* Change as needed */
+  padding: 10px 0; /* Spacing inside the bar */
+  text-align: center; /* Center buttons horizontally */
+  position: fixed; /* Fix to the top of the page */
+  top: 0;
+  left: 0;
+  z-index: 100; /* Make sure it's above other content */
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+  width: 100%;
+  background-color: #f0f0f0; /* Change as needed */
+  padding: 10px 0; /* Spacing inside the bar */
+  text-align: center; /* Center buttons horizontally */
+  position: fixed; /* Fix to the bottom of the page */
+  bottom: 0;
+  left: 0;
+  z-index: 100; /* Make sure it's above other content */
+}
+
+/* Button styles */
+.nav-button {
+  font-size: 16px;
+  margin: 0 10px; /* Spacing between buttons */
+  padding: 10px 20px;
+  /* Additional styles for buttons */
+}
+
+/* Body padding to avoid hiding content behind fixed bars */
+body {
+  padding-top: 60px; /* Height of the top nav */
+  padding-bottom: 60px; /* Height of the bottom nav */
+  /* Rest of body styles */
+}
+/* Container for the buttons */
+.button-container {
+    display: flex; /* Use flexbox to align children */
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Align buttons vertically */
+    gap: 10px; /* Space between buttons */
+  }
+  
+  /* Individual button styles */
+  .button {
+    padding: 10px 20px; /* Padding inside the buttons */
+    /* Other button styles (colors, borders, etc.) */
+  }
+/* Fixed footer container */
+.footer-container {
+    display: flex; /* Use flexbox to align children */
+    justify-content: center; /* Center buttons horizontally */
+    align-items: center; /* Align buttons vertically */
+    gap: 10px; /* Space between buttons */
+    position: fixed; /* Fix to the bottom */
+    bottom: 0; /* Align to bottom */
+    left: 0; /* Align to left */
+    width: 100%; /* Full width */
+    background-color: #f0f0f0; /* Your desired background color for the footer */
+    padding: 10px 0; /* Padding above and below buttons */
+  }
+  
+  /* Individual button styles */
+  .footer-button {
+    padding: 10px 20px; /* Padding inside the buttons */
+    /* Other button styles (colors, borders, etc.) */
+  }
+
+  /* Fixed header container */
+.header-container {
+    display: flex;
+    justify-content: end; /* Space between logo and back button */
+    align-items: center; /* Vertically align content */
+    position: fixed; /* Fix to the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Full width */
+    background-color: #f0f0f0; /* Your desired background color for the header */
+    padding: 10px; /* Padding inside the header */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Optional: adds shadow for depth */
+    z-index: 1000; /* Ensure the header is above other content */
+  }
+  
+  
+  /* Back button styles */
+  .back-button {
+    padding: 5px 10px; /* Smaller padding for textual button */
+    margin-right: 10px; /* Optional: adds some space from the right edge */
+  }
+  
+  /* ... (other styles) ... */
+  
+  /* Update body padding to avoid hiding content behind the fixed header */
+  body {
+    padding-top: 70px; /* Should be greater than the height of your header */
+    /* ... (other body styles) ... */
+  }
+
+/* Style for bottom navigation bar */
+.bottom-nav {
+    display: flex;
+    justify-content: space-evenly; /* Distribute space evenly around items */
+    position: fixed; /* Fix to the bottom */
+    bottom: 0;
+    left: 0;
+    right: 0; /* Extend to the full width */
+    background-color: #00A79D; /* Match the teal background color */
+    padding: 10px 0; /* Add some vertical padding */
+  }
+  
+  /* Style for the buttons within the bottom navigation bar */
+  .bottom-nav button {
+    flex: 1; /* Each button will take equal width */
+    margin: 0 10px; /* Add some horizontal margin */
+    padding: 50px 20px; /* Padding inside the buttons */
+    /* Other button styles (colors, borders, etc.) */
+  }
+  
+  /* Ensure the main content doesn't overlap with the fixed navigation bar */
+  body {
+    padding-bottom: 60px; /* Should be greater than the height of your bottom-nav */
+  }
+  
