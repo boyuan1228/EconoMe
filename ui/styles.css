@@ -8,8 +8,9 @@ html {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: flex;
+  text-align: center;
   background: lightseagreen;
+  font-family: 'Arial', sans-serif; 
 }
 
 img {
@@ -169,10 +170,17 @@ body {
   
   /* Style for the buttons within the bottom navigation bar */
   .bottom-nav button {
-    flex: 1; /* Each button will take equal width */
-    margin: 0 10px; /* Add some horizontal margin */
-    padding: 50px 20px; /* Padding inside the buttons */
+    /*flex: 1; /* Each button will take equal width */
+    /*margin: 0 10px; /* Add some horizontal margin */
+    /*padding: 50px 20px; /* Padding inside the buttons */
     /* Other button styles (colors, borders, etc.) */
+    padding: 10px 15px; /* Reduce padding if buttons are too large */
+    margin: 0 5px; /* Ensure there's space between buttons */
+    flex: none; /* Prevent buttons from stretching */
+  }
+
+  #userGreeting {
+    margin-top: 20px; /* Adjust as necessary */
   }
   
   /* Ensure the main content doesn't overlap with the fixed navigation bar */
