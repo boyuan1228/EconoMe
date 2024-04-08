@@ -23,8 +23,8 @@ public class SessionInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
 
 
-        //若session中没有用户信息 但cookie中存在用户信息，
-        //则通过cookie中的信息重新初始化该用户信息，达到免登录的效果
+        //If there is no user information in the session but there is user information in the cookie.
+        //Then the information in the cookie is used to reinitialize the user's information to achieve the effect of no-login
         if (session.getAttribute(Config.CURRENT_USERNAME) != null && getCookieUser(request) != null) {
 //            System.out.println(HandlerMethod.class +"==="+ handler.getClass());
             if (HandlerMethod.class.equals(handler.getClass())) {
@@ -45,18 +45,18 @@ public class SessionInterceptor implements HandlerInterceptor {
             }
         }
 
-        //如果是移动端登录，则跳过登录验证
+        // Skip login verification if it's a mobile login
         if ("client".equals(request.getHeader("token"))) {
             return true;
         }
         String uri = request.getRequestURI();
         String basePath = request.getContextPath();
 //        System.out.println("session:"+uri);
-        //是登录页面或者静态资源，不拦截
+        //It's a login page or a static resource that doesn't block
         if ("/".equals(uri) || "/login.html".equals(uri) || "/register.html".equals(uri) || "/login.do".equals(uri) || "/register.do".equals(uri) || uri.contains("/static/")) {
 //            System.out.println("---放行---");
         } else {
-            //不是登录页面，则验证是否有session，没有则跳转到登录页面
+            //If it is not a login page, then verify if there is a session, if not, then jump to the login page
             if (session.getAttribute(Config.CURRENT_USERNAME) == null) {
                 response.sendRedirect("/login.html");
                 return false;
@@ -72,7 +72,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     private boolean doLoginInterceptor(String path, String basePath) {
         path = path.substring(basePath.length());
         Set<String> notLoginPaths = new HashSet<>();
-        //设置不进行登录拦截的路径：登录注册和验证码
+        //Setting up paths without login blocking: login registration and authentication code
         notLoginPaths.add("/");
         notLoginPaths.add("/login.html");
         notLoginPaths.add("/register.html");
@@ -87,7 +87,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     }
 
     /**
-     * 获取cookie中的用户信息
+     * Getting user information in a cookie
      *
      * @param request
      * @return

@@ -4,13 +4,9 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-/**
- * Created by Miracle Luna on 2019/11/18
- */
 public class Md5UtilSimple {
 
     /**
-     * 将数据进行 MD5 加密，并以16进制字符串格式输出
      * @param data
      * @return
      */
@@ -20,7 +16,7 @@ public class Md5UtilSimple {
             MessageDigest md = MessageDigest.getInstance("md5");
             byte[] md5 = md.digest(data.getBytes(StandardCharsets.UTF_8));
 
-            // 将字节数据转换为十六进制
+            // Convert byte data to hexadecimal
             for (byte b : md5) {
                 sb.append(Integer.toHexString(b & 0xff));
             }
@@ -33,7 +29,7 @@ public class Md5UtilSimple {
     public static void main(String[] args) {
         String password = "admin123";
         String md5HexStr = md5(password);
-        System.out.println("==> MD5 加密前: " + password);
-        System.out.println("==> MD5 加密后: " + md5HexStr);
+        System.out.println("==> MD5 pre-encryption: " + password);
+        System.out.println("==> MD5 after-encryption: " + md5HexStr);
     }
 }

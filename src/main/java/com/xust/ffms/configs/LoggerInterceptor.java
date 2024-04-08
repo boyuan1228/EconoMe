@@ -30,9 +30,9 @@ public class LoggerInterceptor implements HandlerInterceptor {
         }
         sb.setLength(0);
 
-        sb.append("用户编号【")
+        sb.append("UserID [")
             .append(userid)
-            .append("】正在访问：")
+            .append("] visiting：")
             .append(request.getRequestURL().toString());
         logger.info(sb.toString());
         return true;
