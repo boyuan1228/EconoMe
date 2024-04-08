@@ -30,7 +30,7 @@ public interface BillMapper {
     List<Payway> getAllPayways();
 
     /**
-     * 返回今日支出总额
+     * Return to Today's Total Expenditures
      * @return
      */
     Integer getTodayPayMoney(@Param("nowTime") String nowTime);

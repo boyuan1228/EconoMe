@@ -14,30 +14,30 @@ import java.util.List;
 public interface UserInfoMapper {
 
     /**
-     * 获取单个用户信息，可用于：
-     * 1.登录
-     * 2.通过用户某一部分信息获取用户完整信息
+     * Get individual user information that can be used:
+     * 1. Logging in
+     * 2. Obtaining complete information about a user from a part of the user's information
      * @param userInfo
      * @return
      */
     UserInfo getUserInfo(UserInfo userInfo);
 
     /**
-     * 注册
+     * Login
      * @param userInfo
      * @return
      */
     int addUser(UserInfo userInfo);
 
     /**
-     * 通过username判断该用户是否存在
+     * Determine if the user exists by username
      * @param userInfo
      * @return
      */
     int userIsExisted(UserInfo userInfo);
 
     /**
-     * 通过条件获取符合条件的优化信息 -- 分页
+     * Obtaining eligible optimization information through conditions -- Paging
      * @param model
      * @return
      */
