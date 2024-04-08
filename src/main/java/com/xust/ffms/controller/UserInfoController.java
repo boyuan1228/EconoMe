@@ -68,17 +68,17 @@ public class UserInfoController {
         System.out.println(userIsExisted + " - " + request.getHeader("token"));
         UserInfo user = getUserInfo(userInfo);
         if ("client".equals(request.getHeader("token")) || !userIsExisted) {
-            //用户不存在
-            return ResultUtil.unSuccess("用户不存在！");
+            //The user does not exist!
+            return ResultUtil.unSuccess("The user does not exist!");
         }
         if (userIsExisted && !user.getPassword().equals(Md5UtilSimple.md5(userInfo.getPassword()))) {
-            return ResultUtil.unSuccess("用户名或密码错误！");
+            return ResultUtil.unSuccess("The username or password is incorrect!");
         } else {
-            //将用户信息存入session
+            //Storing user information into session
             userInfo = setSessionUserInfo(user, request.getSession());
-            //将当前用户信息存入cookie
+            //Storing current user information in a cookie
             setCookieUser(request, response);
-            return ResultUtil.success("登录成功", userInfo);
+            return ResultUtil.success("Login Successful", userInfo);
         }
     }
 
@@ -89,7 +89,7 @@ public class UserInfoController {
 
         boolean userIsExisted = userInfoService.userIsExisted(userInfo);
         if (userIsExisted) {
-            return ResultUtil.unSuccess("用户已存在！");
+            return ResultUtil.unSuccess("The user already exists!");
         }
         try {
             userInfo.setPassword(Md5UtilSimple.md5(userInfo.getPassword()));
@@ -123,7 +123,7 @@ public class UserInfoController {
     Result addUser(UserInfo userInfo,HttpSession session) {
         boolean userIsExisted = userInfoService.userIsExisted(userInfo);
         if (userIsExisted) {
-            return ResultUtil.unSuccess("用户已存在！");
+            return ResultUtil.unSuccess("The user already exists!");
         }
         if (Config.getSessionUser(session)!=null){
             userInfo.setHouseid(Config.getSessionUser(session).getHouseid());
@@ -166,14 +166,14 @@ public class UserInfoController {
     public @ResponseBody
     Result updateUserPassword(UserInfo userInfo, @RequestParam(name = "newPassword") String newPassword, @RequestParam(name = "reNewPassword") String reNewPassword, HttpServletRequest request, HttpServletResponse response) {
         if (!reNewPassword.equals(newPassword)) {
-            return ResultUtil.unSuccess("两次新密码不一致！");
+            return ResultUtil.unSuccess("The two new passwords are inconsistent!");
         }
         UserInfo user = getUserInfo(userInfo);
         if (user == null) {
-            return ResultUtil.unSuccess("用户不存在！");
+            return ResultUtil.unSuccess("The user does not exist!");
         }
         if (!Md5UtilSimple.md5(userInfo.getPassword()).equals(user.getPassword())) {
-            return ResultUtil.unSuccess("原密码错误！");
+            return ResultUtil.unSuccess("The original password is wrong!");
         }
         try {
             user.setPassword(Md5UtilSimple.md5(newPassword));
@@ -270,7 +270,7 @@ public class UserInfoController {
         role1.setRolename(role.getName());
         Role role2 = userInfoMapper.selectRoleByName1(role.getName());
         if (role2 != null) {
-            return ResultUtil.unSuccess("该角色已存在");
+            return ResultUtil.unSuccess("This character already exists");
         }
         userInfoService.addRole(role1);
         String[] id = role.getId();
@@ -308,7 +308,7 @@ public class UserInfoController {
         //userInfoMapper.deleteRole(role.getRoleid());
         Role role2 = userInfoMapper.selectRoleByName(role.getName(),role.getRoleid());
         if (role2 != null) {
-            return ResultUtil.unSuccess("该角色已存在");
+            return ResultUtil.unSuccess("This character already exists");
         }
         Role role1 = new Role();
         role1.setRoleid(Integer.valueOf(role.getRoleid()));
@@ -349,23 +349,21 @@ public class UserInfoController {
         userInfoMapper.deleteRole(roleid);
         return ResultUtil.success();
     }
-    /***
-     * 去除String数组中的空值
-     */
+
     private String[] deleteArrayNull(String string[]) {
         String strArr[] = string;
 
-        // step1: 定义一个list列表，并循环赋值
+        // step1: Define a list of lists and assign values cyclically
         ArrayList<String> strList = new ArrayList<String>();
         for (int i = 0; i < strArr.length; i++) {
             strList.add(strArr[i]);
         }
 
-        // step2: 删除list列表中所有的空值
+        // step2: Remove all null values from the list
         while (strList.remove(null));
         while (strList.remove(""));
 
-        // step3: 把list列表转换给一个新定义的中间数组，并赋值给它
+        // step3: Converts the list list to a newly defined intermediate array and assigns it values
         String strArrLast[] = strList.toArray(new String[strList.size()]);
 
         return strArrLast;
@@ -386,20 +384,20 @@ public class UserInfoController {
     }
 
     /**
-     * 登录时将用户信息加入cookie中
+     * Add user information to cookie when logging in
      *
      * @param response
      */
     private void setCookieUser(HttpServletRequest request, HttpServletResponse response) {
         UserInfo user = getSessionUser(request.getSession());
         Cookie cookie = new Cookie(Config.CURRENT_USERNAME, user.getUsername() + "_" + user.getId());
-        //cookie 保存7天
+        
         cookie.setMaxAge(60 * 60 * 24 * 7);
         response.addCookie(cookie);
     }
 
     /**
-     * 注销时删除cookie信息
+     * Delete cookie information when logging out
      *
      * @param request
      * @param response
@@ -412,7 +410,7 @@ public class UserInfoController {
     }
 
     /**
-     * 通过用户信息获取用户权限信息，并存入session中
+     * Get user permission information by user information and store it in session
      *
      * @param userInfo
      * @param session

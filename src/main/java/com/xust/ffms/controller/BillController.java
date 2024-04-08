@@ -31,12 +31,6 @@ public class BillController {
     @Resource
     private BillService billService;
 
-    /**
-     * 适用于统计图
-     *
-     * @param bill
-     * @return
-     */
     @RequestMapping("/getBillsToChart")
     public Result<Bill> findByWhereNoPage(Bill bill, HttpSession session) {
         bill = getHouseBill(bill, session);
@@ -100,8 +94,8 @@ public class BillController {
 
     private Bill getHouseBill(Bill bill, HttpSession session) {
         UserInfo currentUser = Config.getSessionUser(session);
-        //当登录用户为家主时，查询默认查询全家账单情况
-        //当登录用户为普通用户时，仅查询当前用户的账单
+        //When the logged-in user is the head of the household, the query defaults to the whole family's billing status.
+        //When the logged-in user is a regular user, only the current user's bill will be queried.
         if (currentUser.getRoleid() == 2) {
             bill.setHouseid(currentUser.getHouseid());
         } else if (currentUser.getRoleid() == 3) {
@@ -131,9 +125,9 @@ public class BillController {
             int billid = bill.getId();
             bill = new Bill();
             bill.setId(billid);
-            return ResultUtil.success("记账成功！", billService.findByWhereNoPage(bill));
+            return ResultUtil.success("The bookkeeping was successful!", billService.findByWhereNoPage(bill));
         }
-        return ResultUtil.unSuccess("记账失败!");
+        return ResultUtil.unSuccess("Failed to post!");
     }
 
     @RequestMapping(value = "/addProduct", method = RequestMethod.POST)
@@ -141,8 +135,7 @@ public class BillController {
         try {
             int num = billService.addProduct(product);
             if (num > 0) {
-                return ResultUtil.success("新增成功！", billService.findProductfPage(product));
-//                return ResultUtil.success("记账成功！",bill);
+                return ResultUtil.success("Added successfully!", billService.findProductfPage(product));
             } else {
                 return ResultUtil.unSuccess();
             }
@@ -160,7 +153,7 @@ public class BillController {
         try {
             int num = billService.update(bill);
             if (num > 0) {
-                return ResultUtil.success("修改成功！", null);
+                return ResultUtil.success("Modified successfully!", null);
             } else {
                 return ResultUtil.unSuccess();
             }
@@ -175,7 +168,7 @@ public class BillController {
         try {
             int num = billService.updateProduct(product);
             if (num > 0) {
-                return ResultUtil.success("修改成功！", null);
+                return ResultUtil.success("The modification was successful!", null);
             } else {
                 return ResultUtil.unSuccess();
             }
@@ -189,7 +182,7 @@ public class BillController {
         try {
             int num = billService.del(id);
             if (num > 0) {
-                return ResultUtil.success("删除成功！", null);
+                return ResultUtil.success("Deleted successfully!", null);
             } else {
                 return ResultUtil.unSuccess();
             }
@@ -202,7 +195,7 @@ public class BillController {
     public Result delProduct(int id) {
         try {
             billService.delProduct(id);
-            return ResultUtil.success("删除成功！", null);
+            return ResultUtil.success("Deleted successfully!", null);
         } catch (Exception e) {
             return ResultUtil.error(e);
         }
@@ -226,11 +219,11 @@ public class BillController {
     @RequestMapping("/getAllWays")
     public Result<ProductType> getAllWays() {
         List<ProductType> list = new ArrayList<>();
-        list.add(new ProductType("R1", "谨慎型"));
-        list.add(new ProductType("R2", "稳健型"));
-        list.add(new ProductType("R3", "平衡型"));
-        list.add(new ProductType("R4", "进取型"));
-        list.add(new ProductType("R5", "激进型"));
+        list.add(new ProductType("R1", "cautious"));
+        list.add(new ProductType("R2", "robust"));
+        list.add(new ProductType("R3", "balanced"));
+        list.add(new ProductType("R4", "aggressive"));
+        list.add(new ProductType("R5", "radicalized"));
         return ResultUtil.success(list);
     }
 }

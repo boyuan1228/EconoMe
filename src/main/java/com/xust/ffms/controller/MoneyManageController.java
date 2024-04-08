@@ -34,8 +34,8 @@ public class MoneyManageController {
 
     private MoneyManage getHouseBill(MoneyManage bill, HttpSession session) {
         UserInfo currentUser = Config.getSessionUser(session);
-        //当登录用户为家主时，查询默认查询全家账单情况
-        //当登录用户为普通用户时，仅查询当前用户的账单
+        //When the logged-in user is the head of the household, the query defaults to the whole family's billing status.
+        //When the logged-in user is a regular user, only the current user's bill will be queried.
         if (currentUser.getRoleid() == 2){
             bill.setHouseid(currentUser.getHouseid());
         }else if (currentUser.getRoleid() == 3){
@@ -78,7 +78,7 @@ public class MoneyManageController {
         Utils.log(moneyManage.toString());
             int num = moneyManageService.update(moneyManage);
             if(num>0){
-                return ResultUtil.success("修改成功！",null);
+                return ResultUtil.success("Modified successfully!",null);
             }else {
                 return ResultUtil.unSuccess();
             }
@@ -89,7 +89,7 @@ public class MoneyManageController {
         try {
             int num = moneyManageService.del(id);
             if(num>0){
-                return ResultUtil.success("删除成功！",null);
+                return ResultUtil.success("Deleted successfully!",null);
             }else {
                 return ResultUtil.unSuccess();
             }
