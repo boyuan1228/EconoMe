@@ -70,7 +70,7 @@ public class LoggerInterceptor implements HandlerInterceptor {
         sb.setLength(0);
         sb.append("UserID [")
             .append(userid)
-            .append(]】")
+            .append("] ")
             .append(request.getRequestURL().toString())
             .append(" End Of Mission... ");
 
