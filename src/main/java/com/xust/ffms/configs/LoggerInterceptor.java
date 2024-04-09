@@ -68,11 +68,11 @@ public class LoggerInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 
         sb.setLength(0);
-        sb.append("用户编号【")
+        sb.append("UserID [")
             .append(userid)
-            .append("】")
+            .append(]】")
             .append(request.getRequestURL().toString())
-            .append(" 访问结束... ");
+            .append(" End Of Mission... ");
 
         logger.info(sb.toString());
 
